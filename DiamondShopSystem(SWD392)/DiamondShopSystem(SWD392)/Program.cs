@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 var configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConfiguration();
 builder.Services.AddInfrastructuresService(configuration.DatabaseConnection);
 builder.Services.AddWebAPIService();
-builder.Services.AddSingleton(configuration);
+
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

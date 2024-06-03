@@ -17,7 +17,6 @@ namespace Application.Commons
     {
         public string DatabaseConnection { get; set; }
         public JWTSection JWTSection { get; set; }
-        public string DatabaseConnections { get; set; }
     }
 
 }

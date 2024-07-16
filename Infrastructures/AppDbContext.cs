@@ -31,6 +31,7 @@ namespace Infrastructures
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<ProductWarranty> ProductWarranties { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -59,6 +60,7 @@ namespace Infrastructures
             modelBuilder.ApplyConfiguration(new CartItemConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
 
 
             #region insert data

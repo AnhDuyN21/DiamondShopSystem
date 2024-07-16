@@ -1071,7 +1071,8 @@ namespace Infrastructures.Migrations
 
                     b.Property<string>("Material")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
@@ -1082,12 +1083,12 @@ namespace Infrastructures.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("Weight")
-                        .HasColumnType("real");
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductType");
+                    b.ToTable("ProductTypes", (string)null);
 
                     b.HasData(
                         new
@@ -1095,21 +1096,21 @@ namespace Infrastructures.Migrations
                             Id = 1,
                             Material = "Gold",
                             Price = 5567000m,
-                            Weight = 3.75f
+                            Weight = 3.75
                         },
                         new
                         {
                             Id = 2,
                             Material = "Platium",
                             Price = 827287m,
-                            Weight = 1f
+                            Weight = 1.0
                         },
                         new
                         {
                             Id = 3,
                             Material = "Sliver",
                             Price = 22325m,
-                            Weight = 1f
+                            Weight = 1.0
                         });
                 });
 
@@ -1376,7 +1377,7 @@ namespace Infrastructures.Migrations
                     b.HasOne("Domain.Entities.ProductType", "ProductType")
                         .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");

@@ -9,5 +9,6 @@ namespace Application.Repositories
 {
 	public interface IProductTypeRepository : IGenericRepository<ProductType>
 	{
+		Task<bool> NameIsExisted(string name);
 	}
 }

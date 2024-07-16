@@ -76,13 +76,13 @@ namespace Infrastructures.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductType",
+                name: "ProductTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Material = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
@@ -94,7 +94,7 @@ namespace Infrastructures.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductType", x => x.Id);
+                    table.PrimaryKey("PK_ProductTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,10 +161,11 @@ namespace Infrastructures.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Products_ProductType_ProductTypeId",
+                        name: "FK_Products_ProductTypes_ProductTypeId",
                         column: x => x.ProductTypeId,
-                        principalTable: "ProductType",
-                        principalColumn: "Id");
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -487,13 +488,13 @@ namespace Infrastructures.Migrations
                 values: new object[] { 1, "Payment in cash" });
 
             migrationBuilder.InsertData(
-                table: "ProductType",
+                table: "ProductTypes",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "Material", "ModifiedBy", "ModifiedDate", "Price", "Weight" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, null, "Gold", null, null, 5567000m, 3.75f },
-                    { 2, null, null, null, null, null, "Platium", null, null, 827287m, 1f },
-                    { 3, null, null, null, null, null, "Sliver", null, null, 22325m, 1f }
+                    { 1, null, null, null, null, null, "Gold", null, null, 5567000m, 3.75 },
+                    { 2, null, null, null, null, null, "Platium", null, null, 827287m, 1.0 },
+                    { 3, null, null, null, null, null, "Sliver", null, null, 22325m, 1.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -663,7 +664,7 @@ namespace Infrastructures.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "ProductType");
+                name: "ProductTypes");
 
             migrationBuilder.DropTable(
                 name: "Roles");

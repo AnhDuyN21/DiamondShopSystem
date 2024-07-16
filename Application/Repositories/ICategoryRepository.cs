@@ -9,5 +9,6 @@ namespace Application.Repositories
 {
 	public interface ICategoryRepository : IGenericRepository<Category>
 	{
+		Task<bool> NameIsExisted(string name, float size, float length);
 	}
 }

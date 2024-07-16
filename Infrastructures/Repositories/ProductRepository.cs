@@ -33,5 +33,7 @@ namespace Infrastructures.Repositories
 			var product = await _dbContext.Products.Where(x => x.CategoryId == id).FirstOrDefaultAsync();
 			return product != null;
 		}
+		public Task<bool> NameIsExisted(string name) =>
+												 _dbContext.Products.AnyAsync(x => x.Name == name);
 	}
 }

@@ -194,6 +194,13 @@ namespace Application.Services
 		public async Task<ServiceResponse<CreateProductDTO>> CreateProductAsync(CreateProductDTO createProduct)
 		{
 			var response = new ServiceResponse<CreateProductDTO>();
+			var isExisted = await _unitOfWork.ProductRepository.NameIsExisted(createProduct.Name);
+			if (isExisted)
+			{
+				response.Success = false;
+				response.Message = "Name existed!";
+				return response;
+			}
 			try
 			{
 				var product = _mapper.Map<Product>(createProduct);
@@ -298,6 +305,13 @@ namespace Application.Services
 		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO updatedProduct)
 		{
 			var response = new ServiceResponse<ProductDTO>();
+			var isExisted = await _unitOfWork.ProductRepository.NameIsExisted(updatedProduct.Name);
+			if (isExisted)
+			{
+				response.Success = false;
+				response.Message = "Name existed!";
+				return response;
+			}
 			try
 			{
 				var existProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);

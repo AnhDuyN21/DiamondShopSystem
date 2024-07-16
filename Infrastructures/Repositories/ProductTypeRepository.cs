@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace Infrastructures.Repositories
 		{
 			_dbContext = context;
 		}
+		public Task<bool> NameIsExisted(string name) =>
+												 _dbContext.ProductTypes.AnyAsync(x => x.Material == name);
 	}
 }

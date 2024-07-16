@@ -2,11 +2,13 @@
 using Application.Services;
 using Application.ViewModels.ProductDTOs;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-	public class ProductController : BaseController
+    [Authorize]
+    public class ProductController : BaseController
 	{
 		private readonly IProductService productService;
 		public ProductController(IProductService productService)

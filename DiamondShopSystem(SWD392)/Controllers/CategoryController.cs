@@ -1,11 +1,13 @@
 ﻿using Application.Interfaces;
 using Application.Services;
 using Application.ViewModels.CategoryDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-	public class CategoryController : BaseController
+    [Authorize]
+    public class CategoryController : BaseController
 	{
 		private readonly ICategoryService categoryService;
 		public CategoryController(ICategoryService categoryService)

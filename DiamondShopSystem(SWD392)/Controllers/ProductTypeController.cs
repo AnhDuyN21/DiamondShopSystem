@@ -1,10 +1,12 @@
 ﻿using Application.Interfaces;
 using Application.ViewModels.ProductTypeDTOS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-	public class ProductTypeController : BaseController
+    [Authorize]
+    public class ProductTypeController : BaseController
 	{
 		private readonly IProductTypeService typeService;
 		public ProductTypeController(IProductTypeService typeService)

@@ -19,7 +19,7 @@ namespace Application.ViewModels.ProductDTOs
 		[Range(1, int.MaxValue, ErrorMessage = "Wage must be greater than 0.")]
 		public decimal Wage { get; set; }
 		[Required]
-		[Range(1, int.MaxValue, ErrorMessage = "Quantity must be greater than 0.")]
+		[Range(0, int.MaxValue, ErrorMessage = "Quantity must be equal or greater than 0.")]
 		public int Quantity { get; set; }
 	}
 }

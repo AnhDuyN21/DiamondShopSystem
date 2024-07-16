@@ -17,7 +17,7 @@ namespace Application.ViewModels.AccountDTOs
         public string? Gender { get; set; }
         public int? RoleId { get; set; }
         public decimal Point {  get; set; }
-        public bool IsDelete {  get; set; }
+        public bool IsDeleted {  get; set; }
 
     }
 }

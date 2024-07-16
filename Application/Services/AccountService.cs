@@ -35,13 +35,13 @@ namespace Application.Services
             {
                 response.Success = false;
                 response.Message = "Email existed!";
-                //throw new BadRequestException("Email existed!");
+                return response;
             }
             else if(phoneExist == true)
             {
                 response.Success = false;
                 response.Message = "Phone existed!";
-                //throw new BadRequestException("Phone existed!");
+                return response;
             }
 
             try
@@ -102,7 +102,6 @@ namespace Application.Services
             try
             {
                 _unitOfWork.AccountRepository.SoftRemove(exist);
-                exist.IsDeleted = true;
                 var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
                 if (isSuccess)
                 {
@@ -136,10 +135,8 @@ namespace Application.Services
 
                 foreach (var user in users)
                 {
-                    //if (user.IsDeleted == false)
-                    //{
-                        userDTOs.Add(_mapper.Map<AccountDTO>(user));
-                    //}
+                    var account = _mapper.Map<AccountDTO>(user);
+                        userDTOs.Add(account);
                 }
 
                 if (userDTOs.Count != 0)
@@ -170,10 +167,11 @@ namespace Application.Services
             var response = new ServiceResponse<AccountDTO>();
 
             var exist = await _unitOfWork.AccountRepository.GetByIdAsync(id);
-            if (exist == null || exist.IsDeleted == true)
+            if (exist == null)
             {
                 response.Success = false;
                 response.Message = "Account is not existed";
+                return response;
             }
             else
             {

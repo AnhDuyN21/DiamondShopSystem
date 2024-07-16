@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Authorize]
+    
     public class DiamondController : BaseController
     {
         private readonly IDiamondService _diamondService;

@@ -16,14 +16,14 @@ namespace DiamondShopSystem_SWD392_.Controllers
             _promotionService = promotionService;
         }
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult>GetPromotionList()
         {
             var list = await _promotionService.GetListPromotionAsync();
             return Ok(list);
         }
         [HttpGet("{id}")]
-        [Authorize]
+        
         public async Task<IActionResult> GetPromotionById(int id)
         {
             var promotion = await _promotionService.GetPromotionByIdAsync(id);

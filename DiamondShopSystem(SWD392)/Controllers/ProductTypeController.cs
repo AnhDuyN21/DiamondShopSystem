@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Authorize]
+    
     public class ProductTypeController : BaseController
 	{
 		private readonly IProductTypeService typeService;
@@ -26,7 +26,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			var type = await typeService.GetProductTypeByIdAsync(id);
 			return Ok(type);
 		}
-		[HttpPost]
+        [Authorize]
+        [HttpPost]
 		public async Task<IActionResult> CreateProductType([FromForm] CreateProductTypeDTO type)
 		{
 
@@ -47,7 +48,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 				return BadRequest("Invalid request data.");
 			}
 		}
-		[HttpPut]
+        [Authorize]
+        [HttpPut]
 		[Route("{id}")]
 		public async Task<IActionResult> UpdateProductType(int id, [FromBody] CreateProductTypeDTO type)
 		{
@@ -58,7 +60,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			}
 			return Ok(result);
 		}
-		[HttpDelete("{id}")]
+        [Authorize]
+        [HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteProductType(int id)
 		{
 			var type = await typeService.DeleteProductTypeAsync(id);

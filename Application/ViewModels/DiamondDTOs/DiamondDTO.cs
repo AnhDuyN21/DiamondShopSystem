@@ -20,6 +20,7 @@ namespace Application.ViewModels.DiamondDTOs
         public decimal Price { get; set; }
         public int Quantity {  get; set; }
         public ICollection<ImageDTO> Images { get; set; } = new List<ImageDTO>();
+        public bool IsDelete { get; set; }
     }
 }
 

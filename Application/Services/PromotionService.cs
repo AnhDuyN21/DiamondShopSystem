@@ -36,10 +36,9 @@ namespace Application.Services
 
                 foreach (var promotion in list)
                 {
-                    if (promotion.IsDeleted == false)
-                    {
+
                         promotionList.Add(_mapper.Map<PromotionDTO>(promotion));
-                    }
+                    
                 }
                 if (promotionList.Count != 0)
                 {
@@ -67,7 +66,7 @@ namespace Application.Services
 
             var promotion = await _unitOfWork.PromotionRepository.GetByIdAsync(id);
 
-            if (promotion == null || promotion.IsDeleted == true)
+            if (promotion == null )
             {
                 response.Success = false;
                 response.Message = "Promotion is not existed";
@@ -133,8 +132,7 @@ namespace Application.Services
             }
             try
             {
-                _unitOfWork.PromotionRepository.SoftRemove(exist);
-                exist.IsDeleted = true;
+                await _unitOfWork.PromotionRepository.HardDelete(exist.Id);
                 var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
                 if (isSuccess)
                 {

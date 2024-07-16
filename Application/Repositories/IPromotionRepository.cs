@@ -9,5 +9,6 @@ namespace Application.Repositories
 {
     public interface IPromotionRepository : IGenericRepository<Promotion>
     {
+        Task<bool> HardDelete(int id);
     }
 }

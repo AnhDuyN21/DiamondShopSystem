@@ -129,12 +129,7 @@ namespace Application.Services
 
                 foreach (var diamond in diamonds)
                 {
-
-                    if (diamond.IsDeleted == false)
-                    {
-                        
                         diamondDTOs.Add(_mapper.Map<DiamondDTO>(await _unitOfWork.DiamondRepository.GetAsync(d => d.Id == diamond.Id, "Images")));
-                    }
                 }
 
                 if (diamondDTOs.Count != 0)
@@ -169,12 +164,6 @@ namespace Application.Services
             {
                 response.Success = false;
                 response.Message = "Diamond is not existed";
-            }
-            else if(exist.IsDeleted == true)
-            {
-                response.Success = false;
-                response.Message = "Diamond have been deleted from the system";
-            
             }
             else
             {

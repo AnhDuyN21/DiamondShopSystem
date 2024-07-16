@@ -16,5 +16,15 @@ namespace Infrastructures.Repositories
         {
             _dbContext = context;
         }
+        public async Task<bool> HardDelete (int id)
+        {
+           var promotion = await _dbContext.Promotions.FindAsync(id);
+            if(promotion == null)
+            {
+                return false;
+            }
+            _dbContext.Promotions.Remove(promotion);
+            return true;
+        }
     }
 }

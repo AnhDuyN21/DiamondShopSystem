@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Authorize]
+    
     public class CategoryController : BaseController
 	{
 		private readonly ICategoryService categoryService;
@@ -27,7 +27,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			var category = await categoryService.GetCategoryByIdAsync(id);
 			return Ok(category);
 		}
-		[HttpPost]
+        [Authorize]
+        [HttpPost]
 		public async Task<IActionResult> CreateCategory([FromForm] CreateCategoryDTO cat)
 		{
 
@@ -48,7 +49,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 				return BadRequest("Invalid request data.");
 			}
 		}
-		[HttpPut]
+        [Authorize]
+        [HttpPut]
 		[Route("{id}")]
 		public async Task<IActionResult> UpdateCategory(int id, [FromBody] CreateCategoryDTO cat)
 		{
@@ -59,7 +61,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			}
 			return Ok(result);
 		}
-		[HttpDelete("{id}")]
+        [Authorize]
+        [HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteCategory(int id)
 		{
 			var cat = await categoryService.DeleteCategoryAsync(id);

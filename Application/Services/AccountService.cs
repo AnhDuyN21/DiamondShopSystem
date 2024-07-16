@@ -277,5 +277,31 @@ namespace Application.Services
 
             return response;
         }
+        public async Task<ServiceResponse<bool>> UnDeleteUserAysnc(int id)
+        {
+            var response = new ServiceResponse<bool>();
+
+            var exist = await _unitOfWork.AccountRepository.GetByIdAsync(id);
+            if (exist == null )
+            {
+                response.Success = false;
+                response.Message = "Account is not existed";
+                return response;
+            }
+            exist.IsDeleted = false;
+            _unitOfWork.AccountRepository.Update(exist);
+            var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+            if (isSuccess)
+            {
+                response.Success = true;
+                response.Message = "Account undeleted successfully.";
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Error undeleting the account.";
+            }
+            return response;
+        }
     }
 }

@@ -68,6 +68,17 @@ namespace DiamondShopSystem_SWD392_.Controllers
             return Ok(updatedUser);
         }
         [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UnDeleteAccount(int id)
+        {
+            var account = await _accountService.UnDeleteUserAysnc(id);
+            if (!account.Success)
+            {
+                return NotFound(account);
+            }
+            return Ok(account);
+        }
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(int id)
         {
@@ -79,6 +90,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
             return Ok(deletedUser);
         }
+
     }
 }
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Authorize]
+    
     public class ProductController : BaseController
 	{
 		private readonly IProductService productService;
@@ -49,8 +49,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 				return BadRequest(result);
 			}
 		}
-
-		[HttpPost]
+        [Authorize]
+        [HttpPost]
 		public async Task<IActionResult> CreateProduct([FromForm] CreateProductDTO createProduct)
 		{
 
@@ -71,8 +71,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 				return BadRequest("Invalid request data.");
 			}
 		}
-
-		[HttpPut]
+        [Authorize]
+        [HttpPut]
 		[Route("{id}")]
 		public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO productDTO)
 		{
@@ -83,8 +83,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			}
 			return Ok(result);
 		}
-
-		[HttpDelete("{id}")]
+        [Authorize]
+        [HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteProduct(int id)
 		{
 			var product = await productService.DeleteProductAsync(id);

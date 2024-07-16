@@ -16,5 +16,7 @@ namespace Application.Interfaces
         Task<ServiceResponse<bool>> DeleteUserAsync(int id);
         Task<ServiceResponse<IEnumerable<AccountDTO>>> SearchUserByNameAsync(string name);
         Task<ServiceResponse<AccountDTO>> CreateAccountAsync(CreateAccountDTO createdUserDTO);
+        Task<ServiceResponse<bool>> UnDeleteUserAysnc(int id);
+
     }
 }

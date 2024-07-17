@@ -11,7 +11,7 @@ namespace Application.Interfaces
 {
 	public interface IProductService
 	{
-		Task<ServiceResponse<IEnumerable<ProductDTO>>> GetProductsAsync();
+		Task<ServiceResponse<IEnumerable<ProductDTO>>> GetProductsAsync(int? categoryId = null);
 		Task<ServiceResponse<ProductDTO>> GetProductByIdAsync(int id);
 		Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO pro);
 		Task<ServiceResponse<bool>> DeleteProductAsync(int id);

@@ -82,6 +82,19 @@ namespace Application.Services
                     foreach (var item in cartRequest.Items)
                     {
                         var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
+                        if (product == null)
+                        {
+                            response.Success = false;
+                            response.Message = $"Product with id: {item.ProductId} is not exist.";
+                            return response;
+                        }
+
+                        if (item.Quantity <= 0)
+                        {
+                            response.Success = false;
+                            response.Message = "The quantity of product must be greater than 0.";
+                            return response;
+                        }
                         if (product.Quantity >= item.Quantity)
                         {
                             cart.Items.Add(new CartItem
@@ -110,6 +123,13 @@ namespace Application.Services
                         {
                             response.Success = false;
                             response.Message = $"Product with id: {item.ProductId} is not exist.";
+                            return response;
+                        }
+
+                        if (item.Quantity <= 0)
+                        {
+                            response.Success = false;
+                            response.Message = "The quantity of product must be greater than 0.";
                             return response;
                         }
 
@@ -205,6 +225,14 @@ namespace Application.Services
                         response.Message = $"Product with id: {item.ProductId} is not exist.";
                         return response;
                     }
+
+                    if (item.Quantity <= 0)
+                    {
+                        response.Success = false;
+                        response.Message = "The quantity of product must be greater than 0.";
+                        return response;
+                    }
+
                     var cartItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
                     if (cartItem != null)
                     {

@@ -17,9 +17,9 @@ namespace DiamondShopSystem_SWD392_.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> GetProducts()
+		public async Task<IActionResult> GetProducts(int? categoryId)
 		{
-			var products = await productService.GetProductsAsync();
+			var products = await productService.GetProductsAsync(categoryId);
 			return Ok(products);
 		}
 
